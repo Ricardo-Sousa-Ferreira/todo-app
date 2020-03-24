@@ -1,0 +1,37 @@
+#topNavBar{
+    display: flex;
+    justify-content: space-between;
+}
+
+#container{
+    display: flex;
+    justify-content: space-between;
+}
+
+#leftCol{
+    width: 30%;
+}
+
+#rightCol{
+    width: 65%;
+}
+
+#projectForm{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    margin-left: -200px;
+    top:50%;
+    margin-top: -200px;
+    justify-content: space-between;
+    padding: 10px;
+    
+}
+
+.invisible{
+    display: none;
+}
