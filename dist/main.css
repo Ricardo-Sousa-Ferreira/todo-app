@@ -1,6 +1,49 @@
+html{
+    margin:0;
+}
+
 #topNavBar{
     display: flex;
     justify-content: space-between;
+    background: #3498eb;
+    height: 60px;
+    align-items: center;
+    color: white;
+    font-family: 'Baloo 2', cursive;
+    font-size: 30px;
+    min-width: 630px;
+}
+
+#quickFind{
+    display: flex;
+    background: white;
+    padding: 0 20px;
+    border-radius: 8px;
+    height: 40px;
+    width: 400px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#quickSearch:focus{
+    outline:none;
+}
+
+.fa-search{
+    color:#3498eb;
+    font-size: 20px;
+}
+
+#quickSearch{
+    background: transparent;
+    border: none;
+    width: 380px;
+    height: 35px;
+    padding: 0 20px;
+}
+
+#topNavBar div{
+    margin: 20px 20px;
 }
 
 #container{

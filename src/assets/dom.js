@@ -8,7 +8,7 @@ function domElements(){
     const toggleInvisibility = document.getElementById("toggleInvisibility");
     const cancelButton = document.getElementById("cancelButton");
 
-    return {iconDiv, quickFind, addNewTask}
+    return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility}
 }
 
 let dom = domElements();
