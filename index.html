@@ -29,9 +29,9 @@
     <div id="toggleInvisibility" class="invisible">
         <div id="projectForm">
             <label>Task Name</label>
-                <input type="text" id="task-name" maxlength="25">
+                <input type="text" id="taskName" maxlength="25">
             <label>Description</label>
-                <textarea name="Description" rows="3" cols="40" id="task-descripion"></textarea>
+                <textarea name="Description" rows="3" cols="40" id="taskDescripion"></textarea>
             <label>Due Date</label>
                 <input type="date" id="dueDate">
             <label>Priority</label>
@@ -41,12 +41,11 @@
                 <option value = "high">High</option>
             </select>
             <div id="statusContainer">
-                <label>Status</label>
+                <label>Done</label>
                 <input type="checkbox" id="done" name="done" value="true">
             </div>
-            <label for="done">To Do</label>
             <label>Assing to Project:</label>
-            <select class="assign-project" name="assign-project" id="assign-project">
+            <select class="assign-project" name="assignProject" id="assignProject">
             </select>
             <div id="buttonsContainer">
                 <button id="submitButton">
