@@ -1,7 +1,11 @@
 html{
     margin:0;
 }
+body{
+    height: 100vh;
+}
 
+/*Navbar*/
 #topNavBar{
     display: flex;
     justify-content: space-between;
@@ -46,19 +50,37 @@ html{
     margin: 20px 20px;
 }
 
+/*Main Container*/
 #container{
     display: flex;
     justify-content: space-between;
+    height: 100%;
 }
-
+/*Left Collumn*/
 #leftCol{
+    background: #e2f1fd;
     width: 30%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgb(221, 221, 221);  
+    height: 100%;
 }
 
+#filters{
+    border-bottom: 1px solid rgb(221, 221, 221);
+    height: 50%;
+}
+
+#projects{
+    height: 50%;
+}
+
+/*Right Collumn*/
 #rightCol{
-    width: 65%;
+    width: 70%;
 }
 
+/*Pop-Up Form*/
 #projectForm{
     border: 2px solid black;
     display: flex;
@@ -72,7 +94,6 @@ html{
     margin-top: -200px;
     justify-content: space-between;
     padding: 10px;
-    
 }
 
 .invisible{
