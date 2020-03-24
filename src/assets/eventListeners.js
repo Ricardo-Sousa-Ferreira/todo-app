@@ -1,4 +1,5 @@
-import {dom} from "./dom.js"
+import {dom, getFormValues} from "./dom.js"
+import {createObjectTask} from "./newTaskObject.js"
 
 function addEventListeners(){
 //New Task Button
@@ -12,6 +13,12 @@ dom.cancelButton.addEventListener("click", function(){
 });
 
 }
+
+//Form Submit
+dom.submitButton.addEventListener("click", function(){
+    let values = dom.getFormValues();
+    console.log(values.taskName);
+})
 
 
 
