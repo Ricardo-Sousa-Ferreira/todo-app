@@ -14,10 +14,18 @@ function domElements(){
 
     function createDiv(){
         const newDiv = document.createElement("div");
+        return newDiv;
     }
 
+    //Filters
+    const allTasks = document.getElementById("allTasks");
+    const todayFilter = document.getElementById("todayFilter");
+    const highFilter = document.getElementById("highFilter");
+    const mediumFilter = document.getElementById("mediumFilter");
+    const lowFilter = document.getElementById("lowFilter");
+
     //Form Values
-   function getFormValues(){
+    function getFormValues(){
         const taskName = document.getElementById("taskName").value;
         const taskDescription = document.getElementById("taskDescription").value;
         const dueDate = document.getElementById("dueDate").value;
@@ -26,9 +34,10 @@ function domElements(){
         const assignProject = document.getElementById("assignProject").value;
 
         return {taskName, taskDescription, dueDate, priorityLevel, done, assignProject}
-   }
+    }
 
-    return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility, submitButton, taskName, rightCol,  getFormValues, createDiv}
+    return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility, submitButton, taskName, 
+            rightCol, highFilter, mediumFilter, lowFilter, allTasks, todayFilter,  getFormValues, createDiv}
 }
 
 let dom = domElements();
