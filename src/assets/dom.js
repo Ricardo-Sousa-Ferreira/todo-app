@@ -9,10 +9,17 @@ function domElements(){
     const cancelButton = document.getElementById("cancelButton");
     const submitButton = document.getElementById("submitButton");
 
+    //Main Display
+    const rightCol = document.getElementById("rightCol");
+
+    function createDiv(){
+        const newDiv = document.createElement("div");
+    }
+
     //Form Values
    function getFormValues(){
         const taskName = document.getElementById("taskName").value;
-        const taskDescription = document.getElementById("taskDescripion").value;
+        const taskDescription = document.getElementById("taskDescription").value;
         const dueDate = document.getElementById("dueDate").value;
         const priorityLevel = document.getElementById("priorityLevel").value;
         const done = document.getElementById("done").value;
@@ -21,7 +28,7 @@ function domElements(){
         return {taskName, taskDescription, dueDate, priorityLevel, done, assignProject}
    }
 
-    return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility, submitButton, taskName,  getFormValues}
+    return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility, submitButton, taskName, rightCol,  getFormValues, createDiv}
 }
 
 let dom = domElements();
