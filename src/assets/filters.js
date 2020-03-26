@@ -47,6 +47,7 @@ function filterElements(){
         return filtered;
     }
 
+
     return {highFilter, mediumFilter, lowFilter, todayFilter, thisWeekFilter, behindSchedule}
 }
 

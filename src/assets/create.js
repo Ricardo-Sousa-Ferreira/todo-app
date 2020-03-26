@@ -17,4 +17,16 @@ const newProject = (projName) => {
 
 }
 
-export {createObjectTask, pushToArray, newProject};
+const deleteTask = (deleteId, arr) =>{
+    deleteId = parseInt(deleteId);
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i].id == deleteId ) { 
+            arr.splice(i,1);
+        }
+    }
+     console.log(arr);
+    return arr;
+    
+}
+
+export {createObjectTask, pushToArray, newProject, deleteTask};

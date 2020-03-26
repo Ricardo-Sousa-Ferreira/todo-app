@@ -1,5 +1,5 @@
 import {dom} from "./dom.js"
-import {createObjectTask, pushToArray, newProject} from "./create.js"
+import {createObjectTask, pushToArray, newProject, deleteTask} from "./create.js"
 import {render} from "./render.js"
 import {filterEl} from "./filters.js"
 import {search} from "./search.js";
@@ -13,6 +13,8 @@ let projectArray = [{
 let arrayToRender=[]
 
 let activeFilter = "showAll";
+
+let deleteButtons = document.getElementsByClassName("deleteIcon");
 
 function addEventListeners(){
     
@@ -28,6 +30,9 @@ dom.cancelButton.addEventListener("click", function(){
 });
 
 
+//Delete Task
+
+
 //Form Submit
 dom.submitButton.addEventListener("click", function(){
     let values = dom.getFormValues();
@@ -36,35 +41,23 @@ dom.submitButton.addEventListener("click", function(){
     const newTask = createObjectTask(values.taskName, values.taskDescription, 
           formatedDate, values.priorityLevel, values.done, values.assignProject);
     pushToArray(newTask, taskArray); 
-    
-    switch(activeFilter){
-        case "showAll":
-            arrayToRender = taskArray;
-            break;
-        case "today":
-            arrayToRender = filterEl.todayFilter(taskArray);
-            break;
-        case "thisWeek":
-            arrayToRender = filterEl.thisWeekFilter(taskArray);
-            break;
-        case "behindSchedule":
-            arrayToRender = filterEl.behindSchedule(taskArray);
-            break;
-        case "high":
-            arrayToRender = filterEl.highFilter(taskArray);
-            break;
-        case "medium":
-            arrayToRender = filterEl.mediumFilter(taskArray);
-            break;
-        case "low":
-            arrayToRender = filterEl.lowFilter(taskArray);
-            break;
-    }
-
-    render.renderMainDisplay(arrayToRender);
-    const deleteButtons = document.getElementsByClassName("deleteIcon");
-    console.log(deleteButtons);
+    render.renderUpdate(activeFilter, arrayToRender, taskArray);
+    addDeleteButtonsEvents();
 });
+
+function addDeleteButtonsEvents(){
+    //Adds click event to newly created delete icons
+    deleteButtons = document.getElementsByClassName("deleteIcon");
+    for(let i = 0; i < deleteButtons.length; i++){
+        deleteButtons[i].addEventListener("click", function(e){
+            let value = e.currentTarget;
+            taskArray = deleteTask(value.id, taskArray);
+            render.renderUpdate(activeFilter, arrayToRender, taskArray);
+            addDeleteButtonsEvents();
+        });
+    }
+}
+
 
 //Projects
 dom.check.addEventListener("click", function(){
@@ -75,49 +68,56 @@ dom.check.addEventListener("click", function(){
     render.projDropBox(projectArray);
 });
 
-}
+
 
 //Filters
 dom.allTasks.addEventListener("click", function(){
     arrayToRender = taskArray;
     render.renderMainDisplay(arrayToRender);
     activeFilter = "showAll";
+    addDeleteButtonsEvents();
 });
 
 dom.todayFilter.addEventListener("click", function(){
     arrayToRender = filterEl.todayFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "today";
+    addDeleteButtonsEvents();
 });
 
 dom.thisWeekFilter.addEventListener("click", function(){
     arrayToRender = filterEl.thisWeekFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "thisWeek";
+    addDeleteButtonsEvents();
 });
 
 dom.behindSchedule.addEventListener("click", function(){
     arrayToRender = filterEl.behindSchedule(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "behindSchedule";
+    addDeleteButtonsEvents();
 });
 
 dom.highFilter.addEventListener("click", function(){
     arrayToRender = filterEl.highFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "high";
+    addDeleteButtonsEvents();
 });
 
 dom.mediumFilter.addEventListener("click", function(){
     arrayToRender = filterEl.mediumFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "medium";
+    addDeleteButtonsEvents();
 });
 
 dom.lowFilter.addEventListener("click", function(){
     arrayToRender = filterEl.lowFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "low";
+    addDeleteButtonsEvents();
 });
 
 
@@ -126,4 +126,6 @@ dom.searchInput.addEventListener("keyup", function(){
     const arrayToRender = search.searchBar(dom.searchInput.value, taskArray);
     render.renderMainDisplay(arrayToRender);
 })
+
+}
 export {addEventListeners, taskArray, projectArray};

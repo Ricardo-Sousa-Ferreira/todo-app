@@ -1,4 +1,5 @@
 import {dom} from "./dom.js"
+import {filterEl} from "./filters.js"
 
 function renderElements(){
 
@@ -19,14 +20,15 @@ function renderElements(){
             dueDateDiv.classList.add("displayMainTask");
             deleteDiv.classList.add("deleteIcon");
 
+            deleteDiv.setAttribute("id", element.id);
+
             dom.rightCol.appendChild(newDiv);
             newDiv.appendChild(titleDiv);
             newDiv.appendChild(dueDateDiv);
-            newDiv.appendChild(deleteDiv);
-
-            
+            newDiv.appendChild(deleteDiv);      
         });
-        const deleteButtons = document.getElementsByClassName("deleteIcon");
+
+        
     }
 
     function projArray(arr){
@@ -48,7 +50,39 @@ function renderElements(){
             dom.assignProject.appendChild(newOption);
         })
     }
-    return{renderMainDisplay, projArray, projDropBox}
+
+    function renderUpdate(activeFilter, arrayToRender, taskArray){
+        console.log(taskArray+"dfee");
+        switch(activeFilter){
+            case "showAll":
+                arrayToRender = taskArray;
+                break;
+            case "today":
+                arrayToRender = filterEl.todayFilter(taskArray);
+                break;
+            case "thisWeek":
+                arrayToRender = filterEl.thisWeekFilter(taskArray);
+                break;
+            case "behindSchedule":
+                arrayToRender = filterEl.behindSchedule(taskArray);
+                break;
+            case "high":
+                arrayToRender = filterEl.highFilter(taskArray);
+                break;
+            case "medium":
+                arrayToRender = filterEl.mediumFilter(taskArray);
+                break;
+            case "low":
+                arrayToRender = filterEl.lowFilter(taskArray);
+                break;
+        }
+    
+        renderMainDisplay(arrayToRender);
+
+    }
+
+
+    return{renderMainDisplay, projArray, projDropBox, renderUpdate}
 }
 
 
