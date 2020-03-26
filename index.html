@@ -22,12 +22,18 @@
             <div id="filters">
                 <div id="allTasks">All Tasks</div>
                 <div id="todayFilter">Today</div>
-                <div>This Week</div>
+                <div id="thisWeekFilter">This Week</div>
+                <div id="behindSchedule">Behind Schedule</div>
                 <div id="lowFilter">Low Priority</div>
                 <div id="mediumFilter">Medium Priority</div>
                 <div id="highFilter">High Priority</div>
             </div>
-            <div id="projects">projectos</div>
+            <div id="projects">
+                <div id="projectList"></div>
+                <label for ="newProject"><i class="fas fa-plus-circle"></i></label>
+                    <input type="text" id="newProject">
+                    <i id="check" class="fas fa-check"></i>
+            </div>
         </div>
         <div id="rightCol"></div>
     </div>
@@ -53,6 +59,7 @@
             </div>
             <label>Assing to Project:</label>
             <select class="assign-project" name="assignProject" id="assignProject">
+                <option>Please Create a New Project</option>
             </select>
             <div id="buttonsContainer">
                 <button id="submitButton">
