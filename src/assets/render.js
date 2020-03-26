@@ -5,12 +5,28 @@ function renderElements(){
     function renderMainDisplay(arr){
         dom.rightCol.innerText = "";
         arr.forEach(element => {
-            const newDiv = dom.createDiv()
-            newDiv.innerHTML = element.title;
-            newDiv.classList.add("displayMain");
-            dom.rightCol.appendChild(newDiv);
-        });
+            const newDiv = dom.createDiv();
+            const titleDiv = dom.createDiv();
+            const dueDateDiv = dom.createDiv();
+            const deleteDiv = dom.createDiv();
 
+            titleDiv.innerHTML = element.title;
+            dueDateDiv.innerHTML = element.dueDate;
+            deleteDiv.innerHTML = '<i class="fas fa-trash-alt"></i>';
+
+            newDiv.classList.add("displayMain");
+            titleDiv.classList.add("displayMainTask");
+            dueDateDiv.classList.add("displayMainTask");
+            deleteDiv.classList.add("deleteIcon");
+
+            dom.rightCol.appendChild(newDiv);
+            newDiv.appendChild(titleDiv);
+            newDiv.appendChild(dueDateDiv);
+            newDiv.appendChild(deleteDiv);
+
+            
+        });
+        const deleteButtons = document.getElementsByClassName("deleteIcon");
     }
 
     function projArray(arr){

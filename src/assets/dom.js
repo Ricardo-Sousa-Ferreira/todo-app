@@ -37,6 +37,9 @@ function domElements(){
         return newProjectName;
     }
 
+    //Search Bar
+    const searchInput = document.getElementById("quickSearch");
+
     //Form Values
     function getFormValues(){
         const taskName = document.getElementById("taskName").value;
@@ -51,7 +54,7 @@ function domElements(){
 
     return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility, submitButton, taskName, 
             rightCol, highFilter, mediumFilter, lowFilter, allTasks, todayFilter, thisWeekFilter,behindSchedule,
-            newProject, check, projectList, assignProject, getFormValues, createDiv, getProjectName}
+            newProject, check, projectList, assignProject, searchInput, getFormValues, createDiv, getProjectName}
 }
 
 let dom = domElements();

@@ -2,9 +2,17 @@ import {dom} from "./dom.js"
 import {createObjectTask, pushToArray, newProject} from "./create.js"
 import {render} from "./render.js"
 import {filterEl} from "./filters.js"
+import {search} from "./search.js";
 
 let taskArray = [];
-let projectArray = [];
+let projectArray = [{
+    projName: "Default",
+    projId:0
+}];
+
+let arrayToRender=[]
+
+let activeFilter = "showAll";
 
 function addEventListeners(){
     
@@ -27,7 +35,35 @@ dom.submitButton.addEventListener("click", function(){
     formatedDate.setHours(0,0,0,0);
     const newTask = createObjectTask(values.taskName, values.taskDescription, 
           formatedDate, values.priorityLevel, values.done, values.assignProject);
-    pushToArray(newTask, taskArray);  
+    pushToArray(newTask, taskArray); 
+    
+    switch(activeFilter){
+        case "showAll":
+            arrayToRender = taskArray;
+            break;
+        case "today":
+            arrayToRender = filterEl.todayFilter(taskArray);
+            break;
+        case "thisWeek":
+            arrayToRender = filterEl.thisWeekFilter(taskArray);
+            break;
+        case "behindSchedule":
+            arrayToRender = filterEl.behindSchedule(taskArray);
+            break;
+        case "high":
+            arrayToRender = filterEl.highFilter(taskArray);
+            break;
+        case "medium":
+            arrayToRender = filterEl.mediumFilter(taskArray);
+            break;
+        case "low":
+            arrayToRender = filterEl.lowFilter(taskArray);
+            break;
+    }
+
+    render.renderMainDisplay(arrayToRender);
+    const deleteButtons = document.getElementsByClassName("deleteIcon");
+    console.log(deleteButtons);
 });
 
 //Projects
@@ -43,39 +79,51 @@ dom.check.addEventListener("click", function(){
 
 //Filters
 dom.allTasks.addEventListener("click", function(){
-    render.renderMainDisplay(taskArray);
+    arrayToRender = taskArray;
+    render.renderMainDisplay(arrayToRender);
+    activeFilter = "showAll";
 });
 
 dom.todayFilter.addEventListener("click", function(){
-    const arraytoRender = filterEl.todayFilter(taskArray);
-    render.renderMainDisplay(arraytoRender);
+    arrayToRender = filterEl.todayFilter(taskArray);
+    render.renderMainDisplay(arrayToRender);
+    activeFilter = "today";
 });
 
 dom.thisWeekFilter.addEventListener("click", function(){
-    const arraytoRender = filterEl.thisWeekFilter(taskArray);
-    render.renderMainDisplay(arraytoRender);
+    arrayToRender = filterEl.thisWeekFilter(taskArray);
+    render.renderMainDisplay(arrayToRender);
+    activeFilter = "thisWeek";
 });
 
 dom.behindSchedule.addEventListener("click", function(){
-    const arraytoRender = filterEl.behindSchedule(taskArray);
-    render.renderMainDisplay(arraytoRender);
+    arrayToRender = filterEl.behindSchedule(taskArray);
+    render.renderMainDisplay(arrayToRender);
+    activeFilter = "behindSchedule";
 });
 
 dom.highFilter.addEventListener("click", function(){
-    const arraytoRender = filterEl.highFilter(taskArray);
-    render.renderMainDisplay(arraytoRender);
+    arrayToRender = filterEl.highFilter(taskArray);
+    render.renderMainDisplay(arrayToRender);
+    activeFilter = "high";
 });
 
 dom.mediumFilter.addEventListener("click", function(){
-    const arraytoRender = filterEl.mediumFilter(taskArray);
-    render.renderMainDisplay(arraytoRender);
+    arrayToRender = filterEl.mediumFilter(taskArray);
+    render.renderMainDisplay(arrayToRender);
+    activeFilter = "medium";
 });
 
 dom.lowFilter.addEventListener("click", function(){
-    const arraytoRender = filterEl.lowFilter(taskArray);
-    render.renderMainDisplay(arraytoRender);
+    arrayToRender = filterEl.lowFilter(taskArray);
+    render.renderMainDisplay(arrayToRender);
+    activeFilter = "low";
 });
 
 
-
+//Search Bar
+dom.searchInput.addEventListener("keyup", function(){
+    const arrayToRender = search.searchBar(dom.searchInput.value, taskArray);
+    render.renderMainDisplay(arrayToRender);
+})
 export {addEventListeners, taskArray, projectArray};
