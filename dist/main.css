@@ -75,6 +75,10 @@ body{
     height: 50%;
 }
 
+.projectsDisplay{
+    background: blue;
+}
+
 /*Right Collumn*/
 #rightCol{
     width: 70%;

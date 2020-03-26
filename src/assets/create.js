@@ -1,4 +1,5 @@
 let id = 0;
+let projId = 0;
 
 const createObjectTask = (title, description, dueDate, priority, checkStatus, project) => {
     id++;
@@ -10,4 +11,10 @@ const pushToArray = (newTask, taskArray) => {
     window.localStorage.setItem(id, JSON.stringify(taskArray));
 }
 
-export {createObjectTask, pushToArray};
+const newProject = (projName) => {
+    projId++;
+    return{projName, projId};
+
+}
+
+export {createObjectTask, pushToArray, newProject};

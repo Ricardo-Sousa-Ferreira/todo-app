@@ -20,9 +20,22 @@ function domElements(){
     //Filters
     const allTasks = document.getElementById("allTasks");
     const todayFilter = document.getElementById("todayFilter");
+    const thisWeekFilter = document.getElementById("thisWeekFilter");
+    const behindSchedule = document.getElementById("behindSchedule");
     const highFilter = document.getElementById("highFilter");
     const mediumFilter = document.getElementById("mediumFilter");
     const lowFilter = document.getElementById("lowFilter");
+
+    //New Project
+    const newProject = document.getElementById("newProject");
+    const check = document.getElementById("check");
+    const projectList = document.getElementById("projectList");
+    const assignProject = document.getElementById("assignProject");
+
+    function getProjectName(){
+        const newProjectName = document.getElementById("newProject").value;
+        return newProjectName;
+    }
 
     //Form Values
     function getFormValues(){
@@ -37,7 +50,8 @@ function domElements(){
     }
 
     return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility, submitButton, taskName, 
-            rightCol, highFilter, mediumFilter, lowFilter, allTasks, todayFilter,  getFormValues, createDiv}
+            rightCol, highFilter, mediumFilter, lowFilter, allTasks, todayFilter, thisWeekFilter,behindSchedule,
+            newProject, check, projectList, assignProject, getFormValues, createDiv, getProjectName}
 }
 
 let dom = domElements();

@@ -26,7 +26,28 @@ function filterElements(){
         return filtered;
     }
 
-    return {highFilter, mediumFilter, lowFilter, todayFilter}
+    function thisWeekFilter(taskArray){
+        let today = new Date();
+        today.setHours(0,0,0,0);
+        let sixFromNow = new Date();
+        sixFromNow.setDate(sixFromNow.getDate()+6);
+        sixFromNow.setHours(0,0,0,0);
+
+        const filtered = taskArray.filter(task =>
+            (task.dueDate.getTime() >= today.getTime()) && (task.dueDate.getTime() <= sixFromNow.getTime()));
+        return filtered;
+    }
+
+    function behindSchedule(taskArray){
+        let today = new Date();
+        today.setHours(0,0,0,0);
+
+        const filtered = taskArray.filter(task =>
+            task.dueDate.getTime() < today.getTime());
+        return filtered;
+    }
+
+    return {highFilter, mediumFilter, lowFilter, todayFilter, thisWeekFilter, behindSchedule}
 }
 
 const filterEl = filterElements();
