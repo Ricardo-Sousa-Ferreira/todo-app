@@ -125,6 +125,7 @@ dom.lowFilter.addEventListener("click", function(){
 dom.searchInput.addEventListener("keyup", function(){
     const arrayToRender = search.searchBar(dom.searchInput.value, taskArray);
     render.renderMainDisplay(arrayToRender);
+    addDeleteButtonsEvents();
 })
 
 }
