@@ -18,9 +18,12 @@ const newProject = (projName) => {
 }
 
 const deleteTask = (deleteId, arr) =>{
+    console.log(deleteId);
+    console.log(arr);
+
     deleteId = parseInt(deleteId);
     for(let i = 0; i < arr.length; i++){
-        if(arr[i].id == deleteId ) { 
+        if(arr[i].projId == deleteId) { 
             arr.splice(i,1);
         }
     }

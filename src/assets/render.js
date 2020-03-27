@@ -46,11 +46,17 @@ function renderElements(){
     function projArray(arr){
         dom.projectList.innerText = "";
         arr.forEach(element => {
+            const projContainer = dom.createDiv();
             const newDiv = dom.createDiv();
             const projDeleteIcon = dom.createDiv();
             newDiv.innerHTML = element.projName;
             newDiv.classList.add("projectsDisplay");
-            dom.projectList.appendChild(newDiv);
+            projDeleteIcon.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            projDeleteIcon.classList.add("projDeleteIcon");
+            projDeleteIcon.setAttribute("id", element.projId);
+            projContainer.appendChild(newDiv);
+            projContainer.appendChild(projDeleteIcon);
+            dom.projectList.appendChild(projContainer);
         })
     }
 

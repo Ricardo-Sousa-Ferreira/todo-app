@@ -16,9 +16,11 @@ let activeFilter = "showAll";
 
 let deleteButtons = document.getElementsByClassName("deleteIcon");
 let editButtons = document.getElementsByClassName("editIcon");
-
+let deleteIcon = document.getElementsByClassName("projDeleteIcon");
 function addEventListeners(){
     
+addDeleteIconEvents();
+addEventLis();
 
 //New Task Button
 dom.addNewTask.addEventListener("click", function(){
@@ -90,9 +92,22 @@ dom.check.addEventListener("click", function(){
     pushToArray(newProj, projectArray);
     render.projArray(projectArray);
     render.projDropBox(projectArray);
+    addDeleteIconEvents();
 });
 
-
+function addDeleteIconEvents(){
+    deleteIcon = document.getElementsByClassName("projDeleteIcon");
+    for(let i=1; i < deleteIcon.length; i++){
+        deleteIcon[i].addEventListener("click", function(e){
+            let value = e.currentTarget;
+            projectArray = deleteTask(value.id, projectArray);
+            console.log(projectArray);
+            render.projArray(projectArray);
+            render.projDropBox(projectArray);
+            addDeleteIconEvents()
+        })
+    }
+}
 
 //Filters
 dom.allTasks.addEventListener("click", function(){
