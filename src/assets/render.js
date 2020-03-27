@@ -1,7 +1,11 @@
 import {dom} from "./dom.js"
 import {filterEl} from "./filters.js"
 
+
+let taskToEdit;
+
 function renderElements(){
+    
 
     function renderMainDisplay(arr){
         dom.rightCol.innerText = "";
@@ -9,23 +13,31 @@ function renderElements(){
             const newDiv = dom.createDiv();
             const titleDiv = dom.createDiv();
             const dueDateDiv = dom.createDiv();
+            const buttonsDiv = dom.createDiv();
             const deleteDiv = dom.createDiv();
+            const editDiv = dom.createDiv();
 
             titleDiv.innerHTML = element.title;
             dueDateDiv.innerHTML = element.dueDate;
             deleteDiv.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            editDiv.innerHTML = '<i class="fas fa-edit"></i>'
 
             newDiv.classList.add("displayMain");
             titleDiv.classList.add("displayMainTask");
             dueDateDiv.classList.add("displayMainTask");
             deleteDiv.classList.add("deleteIcon");
+            editDiv.classList.add("editIcon");
+            buttonsDiv.classList.add("taskButtons");
 
             deleteDiv.setAttribute("id", element.id);
+            editDiv.setAttribute("id", element.id);
 
             dom.rightCol.appendChild(newDiv);
             newDiv.appendChild(titleDiv);
             newDiv.appendChild(dueDateDiv);
-            newDiv.appendChild(deleteDiv);      
+            buttonsDiv.appendChild(editDiv);
+            buttonsDiv.appendChild(deleteDiv);
+            newDiv.appendChild(buttonsDiv);      
         });
 
         
@@ -34,7 +46,8 @@ function renderElements(){
     function projArray(arr){
         dom.projectList.innerText = "";
         arr.forEach(element => {
-            const newDiv = dom.createDiv()
+            const newDiv = dom.createDiv();
+            const projDeleteIcon = dom.createDiv();
             newDiv.innerHTML = element.projName;
             newDiv.classList.add("projectsDisplay");
             dom.projectList.appendChild(newDiv);
@@ -52,7 +65,6 @@ function renderElements(){
     }
 
     function renderUpdate(activeFilter, arrayToRender, taskArray){
-        console.log(taskArray+"dfee");
         switch(activeFilter){
             case "showAll":
                 arrayToRender = taskArray;
@@ -81,12 +93,38 @@ function renderElements(){
 
     }
 
+    function renderEdit(clickedId, arr){
+        //toggles buttons
+        toggleInvisibility.classList.remove("invisible");
+        submitButton.classList.add("invisible");
+        editButtonForm.classList.remove("invisible");
+        clickedId = parseInt(clickedId);
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i].id == clickedId) {
+                taskToEdit = arr[i];
+                break;
+            }
+        }        
+        taskName.value = taskToEdit.title;
+        taskDescription.value = taskToEdit.description;
+        //formats date
+        console.log(taskToEdit)
+        let date = new Date(taskToEdit.dueDate);
+        let myDateString = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-'
+             + ('0' + date.getDate()).slice(-2);
+        dueDate.value = myDateString;
+        priorityLevel.value = taskToEdit.priority;
+        document.value = taskToEdit.checkStatus;
+        assignProject.value = taskToEdit.project;
+        
+    }
 
-    return{renderMainDisplay, projArray, projDropBox, renderUpdate}
+
+    return{renderMainDisplay, projArray, projDropBox, renderUpdate, renderEdit}
 }
 
 
 
 const render = renderElements();
 
-export{render};
+export{render, taskToEdit};

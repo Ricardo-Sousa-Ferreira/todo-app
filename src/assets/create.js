@@ -24,9 +24,22 @@ const deleteTask = (deleteId, arr) =>{
             arr.splice(i,1);
         }
     }
-     console.log(arr);
     return arr;
     
 }
 
-export {createObjectTask, pushToArray, newProject, deleteTask};
+const editArrayElement = (id, values, arr) => {
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i].id == id) {
+            arr[i].title = values.taskName;
+            arr[i].description = values.taskDescription;
+            arr[i].dueDate = values.dueDate;
+            arr[i]. priority = values.priorityLevel;
+            arr[i].checkStatus = values.done;
+            arr[i].project = values.assignProject;
+        }
+    }     
+    return arr;
+}
+
+export {createObjectTask, pushToArray, newProject, deleteTask, editArrayElement};

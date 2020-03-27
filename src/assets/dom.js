@@ -8,7 +8,7 @@ function domElements(){
     const toggleInvisibility = document.getElementById("toggleInvisibility");
     const cancelButton = document.getElementById("cancelButton");
     const submitButton = document.getElementById("submitButton");
-
+    const editButtonForm = document.getElementById("editButtonForm");
     //Main Display
     const rightCol = document.getElementById("rightCol");
 
@@ -54,7 +54,7 @@ function domElements(){
 
     return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility, submitButton, taskName, 
             rightCol, highFilter, mediumFilter, lowFilter, allTasks, todayFilter, thisWeekFilter,behindSchedule,
-            newProject, check, projectList, assignProject, searchInput, getFormValues, createDiv, getProjectName}
+            newProject, check, projectList, assignProject, searchInput, editButtonForm, getFormValues, createDiv, getProjectName}
 }
 
 let dom = domElements();

@@ -1,6 +1,6 @@
 import {dom} from "./dom.js"
-import {createObjectTask, pushToArray, newProject, deleteTask} from "./create.js"
-import {render} from "./render.js"
+import {createObjectTask, pushToArray, newProject, deleteTask, editArrayElement} from "./create.js"
+import {render, taskToEdit} from "./render.js"
 import {filterEl} from "./filters.js"
 import {search} from "./search.js";
 
@@ -15,6 +15,7 @@ let arrayToRender=[]
 let activeFilter = "showAll";
 
 let deleteButtons = document.getElementsByClassName("deleteIcon");
+let editButtons = document.getElementsByClassName("editIcon");
 
 function addEventListeners(){
     
@@ -22,16 +23,14 @@ function addEventListeners(){
 //New Task Button
 dom.addNewTask.addEventListener("click", function(){
     toggleInvisibility.classList.remove("invisible");
+    submitButton.classList.remove("invisible");
+    editButtonForm.classList.add("invisible");
 });
 
 //Cancel Task Button
 dom.cancelButton.addEventListener("click", function(){
     toggleInvisibility.classList.add("invisible");
 });
-
-
-//Delete Task
-
 
 //Form Submit
 dom.submitButton.addEventListener("click", function(){
@@ -42,9 +41,14 @@ dom.submitButton.addEventListener("click", function(){
           formatedDate, values.priorityLevel, values.done, values.assignProject);
     pushToArray(newTask, taskArray); 
     render.renderUpdate(activeFilter, arrayToRender, taskArray);
-    addDeleteButtonsEvents();
+    addEventLis();
 });
 
+function addEventLis(){
+    addDeleteButtonsEvents();
+    addEditButtonsEvents();
+}
+//Delete Buttons
 function addDeleteButtonsEvents(){
     //Adds click event to newly created delete icons
     deleteButtons = document.getElementsByClassName("deleteIcon");
@@ -53,11 +57,31 @@ function addDeleteButtonsEvents(){
             let value = e.currentTarget;
             taskArray = deleteTask(value.id, taskArray);
             render.renderUpdate(activeFilter, arrayToRender, taskArray);
-            addDeleteButtonsEvents();
+            addEventLis();
         });
     }
 }
 
+function addEditButtonsEvents(){
+    editButtons = document.getElementsByClassName("editIcon");
+    for(let i = 0; i < editButtons.length; i++){
+        editButtons[i].addEventListener("click", function(e){
+            let value = e.currentTarget;
+            render.renderEdit(value.id, taskArray);
+            addEventLis();
+        })
+    }
+}
+
+//Edit Submit
+dom.editButtonForm.addEventListener("click", function(){
+    let values = dom.getFormValues();
+    console.log(values)
+    let idToEdit = taskToEdit.id;
+    taskArray = editArrayElement(idToEdit, values, taskArray);
+    render.renderUpdate(activeFilter, arrayToRender, taskArray);
+    addEventLis();
+});
 
 //Projects
 dom.check.addEventListener("click", function(){
@@ -75,49 +99,49 @@ dom.allTasks.addEventListener("click", function(){
     arrayToRender = taskArray;
     render.renderMainDisplay(arrayToRender);
     activeFilter = "showAll";
-    addDeleteButtonsEvents();
+    addEventLis();
 });
 
 dom.todayFilter.addEventListener("click", function(){
     arrayToRender = filterEl.todayFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "today";
-    addDeleteButtonsEvents();
+    addEventLis();
 });
 
 dom.thisWeekFilter.addEventListener("click", function(){
     arrayToRender = filterEl.thisWeekFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "thisWeek";
-    addDeleteButtonsEvents();
+    addEventLis();
 });
 
 dom.behindSchedule.addEventListener("click", function(){
     arrayToRender = filterEl.behindSchedule(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "behindSchedule";
-    addDeleteButtonsEvents();
+    addEventLis();
 });
 
 dom.highFilter.addEventListener("click", function(){
     arrayToRender = filterEl.highFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "high";
-    addDeleteButtonsEvents();
+    addEventLis();
 });
 
 dom.mediumFilter.addEventListener("click", function(){
     arrayToRender = filterEl.mediumFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "medium";
-    addDeleteButtonsEvents();
+    addEventLis();
 });
 
 dom.lowFilter.addEventListener("click", function(){
     arrayToRender = filterEl.lowFilter(taskArray);
     render.renderMainDisplay(arrayToRender);
     activeFilter = "low";
-    addDeleteButtonsEvents();
+    addEventLis();
 });
 
 
@@ -125,7 +149,7 @@ dom.lowFilter.addEventListener("click", function(){
 dom.searchInput.addEventListener("keyup", function(){
     const arrayToRender = search.searchBar(dom.searchInput.value, taskArray);
     render.renderMainDisplay(arrayToRender);
-    addDeleteButtonsEvents();
+    addEventLis();
 })
 
 }
