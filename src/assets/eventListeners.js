@@ -10,6 +10,15 @@ let projectArray = [{
     id:0
 }];
 
+const onLoad = () => {
+    if (localStorage.taskArrayLocal) {
+        taskArray = JSON.parse(localStorage.getItem('taskArrayLocal'));
+    }
+    if(localStorage.projectArrayLocal){
+        projectArray = JSON.parse(localStorage.getItem('projectArrayLocal'));
+    }
+}
+    
 let arrayToRender=[]
 
 let activeFilter = "showAll";
@@ -18,10 +27,9 @@ let deleteButtons = document.getElementsByClassName("deleteIcon");
 let editButtons = document.getElementsByClassName("editIcon");
 let deleteIcon = document.getElementsByClassName("projDeleteIcon");
 let projectsList = document.getElementsByClassName("projectsDisplay");
-let taskDisplay = document.getElementsByClassName("displayMainTask");
-function addEventListeners(){
-    
-addDeleteIconEvents();
+
+function addEventListeners(){ 
+
 addEventLis();
 
 //New Task Button
@@ -39,6 +47,7 @@ dom.cancelButton.addEventListener("click", function(){
 //Form Submit
 dom.submitButton.addEventListener("click", function(){
     let values = dom.getFormValues();
+    values.status = false;
     if(values.taskName === ""){
         alert("Please Insert a valid name")
         return;
@@ -50,6 +59,8 @@ dom.submitButton.addEventListener("click", function(){
     pushToArray(newTask, taskArray); 
     render.renderUpdate(activeFilter, arrayToRender, taskArray, activeFilterAux);
     addEventLis();
+    
+    
 });
 
 function addEventLis(){
@@ -57,6 +68,11 @@ function addEventLis(){
     addEditButtonsEvents();
     addDoneTaskEvent();
     addProjectFilters();
+    addDeleteIconEvents();
+    localStorage.setItem('taskArrayLocal', JSON.stringify(taskArray));
+    localStorage.setItem('projectArrayLocal', JSON.stringify(projectArray));
+    console.log(localStorage);
+    console.log(projectArray);
 }
 //Delete Buttons
 function addDeleteButtonsEvents(){
@@ -77,6 +93,12 @@ function addDoneTaskEvent(){
     for(let i=0; i<taskDisplay.length; i++){
         taskDisplay[i].addEventListener("click", function (e){
             e.currentTarget.classList.toggle("lineThrough");
+            let clickId = parseInt(e.currentTarget.id);
+            for(let i = 0; i < taskArray.length; i++){
+                if(taskArray[i].id == clickId) { 
+                    taskArray[i].status = taskArray[i].status === true ? false : true; 
+                }
+            }
         })
     }
 
@@ -136,7 +158,9 @@ dom.check.addEventListener("click", function(){
     render.projArray(projectArray);
     render.projDropBox(projectArray);
     addDeleteIconEvents();
-    addProjectFilters()
+    addProjectFilters();
+    localStorage.setItem('projectArrayLocal', JSON.stringify(projectArray));
+    
 });
 
 function addDeleteIconEvents(){
@@ -212,4 +236,4 @@ dom.searchInput.addEventListener("keyup", function(){
 })
 
 }
-export {addEventListeners, taskArray, projectArray};
+export {addEventListeners, taskArray, projectArray, onLoad};

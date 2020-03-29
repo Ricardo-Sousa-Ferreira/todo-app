@@ -19,10 +19,13 @@ function renderElements(){
             const editDiv = dom.createDiv();
 
             titleDiv.innerHTML = element.title;
-            if(element.dueDate != "Invalid Date"){
+            if(element.dueDate != "Invalid Date" && element.dueDate != null){
                 let date = new Date(element.dueDate);
                 dueDateDiv.innerHTML =  ('0' + date.getDate()).slice(-2)+ '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-'
                 + date.getFullYear();
+            }
+            if(element.status === true){
+                newDiv.classList.add("lineThrough");
             }
            
             deleteDiv.innerHTML = '<i class="fas fa-trash-alt"></i>';
@@ -42,6 +45,7 @@ function renderElements(){
 
             deleteDiv.setAttribute("id", element.id);
             editDiv.setAttribute("id", element.id);
+            newDiv.setAttribute("id", element.id);
 
             dom.rightCol.appendChild(newDiv);
             newDiv.appendChild(titleDiv);

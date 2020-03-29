@@ -2,7 +2,7 @@ let id = 0;
 
 const createObjectTask = (title, description, dueDate, priority, project) => {
     id++;
-    return{title,description,dueDate,priority,project, id};
+    return{title,description,dueDate,priority,project, id, status};
 }
 
 const pushToArray = (newTask, taskArray) => {
@@ -19,8 +19,6 @@ const deleteTask = (deleteId, arr) =>{
     deleteId = parseInt(deleteId);
     
     for(let i = 0; i < arr.length; i++){
-        console.log(deleteId);
-        console.log(arr[i].id);
         if(arr[i].id == deleteId) { 
             arr.splice(i,1);
         }
