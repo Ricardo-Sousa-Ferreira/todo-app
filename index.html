@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/8a2f7b5f47.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <title>todo app</title>
+</head>
+<body>
+    <div id="topNavBar">
+        <div id="iconDiv"><i class="far fa-sticky-note"></i></div>
+        <div id="quickFind">
+            <i class="fas fa-search"></i>
+            <input type="text" id="quickSearch" maxlength="45">
+        </div>
+        <div id="addNewTask" class="shake"><i class="far fa-plus-square"></i></div>
+    </div>
+    <div id="container">
+        <div id="leftCol">
+            <div id="filters">
+                <div id="allTasks" class="hover"><i class="fas fa-tasks"></i>All Tasks</div>
+                <div id="todayFilter" class="hover"><i class="fas fa-calendar-day"></i>Today</div>
+                <div id="thisWeekFilter" class="hover"><i class="fas fa-calendar-alt"></i>This Week</div>
+                <div id="behindSchedule" class="hover"><i class="fas fa-backward"></i>Behind Schedule</div>
+                <div id="priorityList"><i class="fas fa-exclamation"></i>Priority:
+                    <div id="lowFilter" class="hover"><i class="fas fa-circle" id="lowIcon"></i>Low</div>
+                    <div id="mediumFilter" class="hover"><i class="fas fa-circle" id="mediumIcon"></i>Medium</div>
+                    <div id="highFilter" class="hover"><i class="fas fa-circle" id="highIcon"></i>High</div>
+                </div>
+            </div>
+            <div id="projects">
+                <div id="projectList"></div>
+                <div id="newProjContainer">
+                    <input type="text" id="newProject">
+                    <i id="check" class="fas fa-plus-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div id="rightCol"></div>
+    </div>
+
+    <!--Form that adds new task-->
+    <div id="toggleInvisibility" class="invisible">
+        <div id="projectForm">
+            <label>Task Name</label>
+                <input class="formInput" type="text" id="taskName" maxlength="25">
+            <label>Description</label>
+                <textarea class="formInput" name="Description" rows="3" cols="40" id="taskDescription"></textarea>
+            <label>Due Date</label>
+                <input class="formInput" type="date" id="dueDate">
+            <label>Priority</label>
+            <select class="piorityLevel formInput" name="piorityLevel" id="priorityLevel">
+                <option value = "low">Low</option>
+                <option value = "medium">Medium</option>
+                <option value = "high">High</option>
+            </select>
+            <label>Assing to Project:</label>
+            <select class="assign-project formInput" name="assignProject" id="assignProject">
+            </select>
+            <div id="buttonsContainer">
+                <button id="editButtonForm" class="invisible button yellow">
+                    Edit Task
+                </button>
+                <button id="submitButton" class="button green">
+                    Add new task
+                </button>
+                <button id="cancelButton" class="button red">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>  
+  
+
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
