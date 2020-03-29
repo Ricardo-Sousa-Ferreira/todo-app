@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/Lepracone/todo-app/issues"
   },
-  "homepage": "https://github.com/Lepracone/todo-app/dist",
+  "homepage": "https://github.com/Lepracone/todo-app#readme",
   "devDependencies": {
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
