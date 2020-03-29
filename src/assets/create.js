@@ -1,29 +1,29 @@
 let id = 0;
-let projId = 0;
 
-const createObjectTask = (title, description, dueDate, priority, checkStatus, project) => {
+const createObjectTask = (title, description, dueDate, priority, project) => {
     id++;
-    return{title,description,dueDate,priority,checkStatus,project, id};
+    return{title,description,dueDate,priority,project, id};
 }
 
 const pushToArray = (newTask, taskArray) => {
     taskArray.push(newTask);
+    console.log(newTask);
     window.localStorage.setItem(id, JSON.stringify(taskArray));
 }
 
 const newProject = (projName) => {
-    projId++;
-    return{projName, projId};
+    id++;
+    return{projName, id};
 
 }
 
 const deleteTask = (deleteId, arr) =>{
-    console.log(deleteId);
-    console.log(arr);
-
     deleteId = parseInt(deleteId);
+    
     for(let i = 0; i < arr.length; i++){
-        if(arr[i].projId == deleteId) { 
+        console.log(deleteId);
+        console.log(arr[i].id);
+        if(arr[i].id == deleteId) { 
             arr.splice(i,1);
         }
     }
@@ -38,7 +38,6 @@ const editArrayElement = (id, values, arr) => {
             arr[i].description = values.taskDescription;
             arr[i].dueDate = values.dueDate;
             arr[i]. priority = values.priorityLevel;
-            arr[i].checkStatus = values.done;
             arr[i].project = values.assignProject;
         }
     }     

@@ -26,6 +26,8 @@ function domElements(){
     const mediumFilter = document.getElementById("mediumFilter");
     const lowFilter = document.getElementById("lowFilter");
 
+    
+
     //New Project
     const newProject = document.getElementById("newProject");
     const check = document.getElementById("check");
@@ -46,10 +48,9 @@ function domElements(){
         const taskDescription = document.getElementById("taskDescription").value;
         const dueDate = document.getElementById("dueDate").value;
         const priorityLevel = document.getElementById("priorityLevel").value;
-        const done = document.getElementById("done").value;
         const assignProject = document.getElementById("assignProject").value;
 
-        return {taskName, taskDescription, dueDate, priorityLevel, done, assignProject}
+        return {taskName, taskDescription, dueDate, priorityLevel, assignProject}
     }
 
     return {iconDiv, quickFind, addNewTask, cancelButton, toggleInvisibility, submitButton, taskName, 

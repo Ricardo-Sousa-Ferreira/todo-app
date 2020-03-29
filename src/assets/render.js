@@ -8,6 +8,7 @@ function renderElements(){
     
 
     function renderMainDisplay(arr){
+        let padron = 1;
         dom.rightCol.innerText = "";
         arr.forEach(element => {
             const newDiv = dom.createDiv();
@@ -25,9 +26,14 @@ function renderElements(){
             newDiv.classList.add("displayMain");
             titleDiv.classList.add("displayMainTask");
             dueDateDiv.classList.add("displayMainTask");
-            deleteDiv.classList.add("deleteIcon");
-            editDiv.classList.add("editIcon");
+            deleteDiv.classList.add("roundIcon","red","deleteIcon","shake");
+            editDiv.classList.add("roundIcon", "yellow", "editIcon", "shake");
             buttonsDiv.classList.add("taskButtons");
+
+            if(padron % 2 === 0){
+                newDiv.classList.add("padron");
+            }
+            padron++
 
             deleteDiv.setAttribute("id", element.id);
             editDiv.setAttribute("id", element.id);
@@ -50,12 +56,16 @@ function renderElements(){
             const newDiv = dom.createDiv();
             const projDeleteIcon = dom.createDiv();
             newDiv.innerHTML = element.projName;
+            
+            projContainer.classList.add("projContainer")
             newDiv.classList.add("projectsDisplay");
             projDeleteIcon.innerHTML = '<i class="fas fa-trash-alt"></i>';
-            projDeleteIcon.classList.add("projDeleteIcon");
-            projDeleteIcon.setAttribute("id", element.projId);
+            projDeleteIcon.classList.add("roundIcon","red","projDeleteIcon","shake");
+            projDeleteIcon.setAttribute("id", element.id);
             projContainer.appendChild(newDiv);
-            projContainer.appendChild(projDeleteIcon);
+            if(element.projName !== "Default"){
+                projContainer.appendChild(projDeleteIcon);
+            }
             dom.projectList.appendChild(projContainer);
         })
     }
@@ -114,13 +124,11 @@ function renderElements(){
         taskName.value = taskToEdit.title;
         taskDescription.value = taskToEdit.description;
         //formats date
-        console.log(taskToEdit)
         let date = new Date(taskToEdit.dueDate);
         let myDateString = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-'
              + ('0' + date.getDate()).slice(-2);
         dueDate.value = myDateString;
         priorityLevel.value = taskToEdit.priority;
-        document.value = taskToEdit.checkStatus;
         assignProject.value = taskToEdit.project;
         
     }

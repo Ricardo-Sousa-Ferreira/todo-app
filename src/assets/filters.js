@@ -38,6 +38,12 @@ function filterElements(){
         return filtered;
     }
 
+    function projectFilter(taskArray, activeProject){
+        const filtered = taskArray.filter(task =>
+            task.project === activeProject);
+            return filtered;
+    }
+
     function behindSchedule(taskArray){
         let today = new Date();
         today.setHours(0,0,0,0);
@@ -48,7 +54,7 @@ function filterElements(){
     }
 
 
-    return {highFilter, mediumFilter, lowFilter, todayFilter, thisWeekFilter, behindSchedule}
+    return {highFilter, mediumFilter, lowFilter, todayFilter, thisWeekFilter, behindSchedule, projectFilter}
 }
 
 const filterEl = filterElements();

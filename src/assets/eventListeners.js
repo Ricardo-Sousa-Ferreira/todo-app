@@ -7,7 +7,7 @@ import {search} from "./search.js";
 let taskArray = [];
 let projectArray = [{
     projName: "Default",
-    projId:0
+    id:0
 }];
 
 let arrayToRender=[]
@@ -17,6 +17,7 @@ let activeFilter = "showAll";
 let deleteButtons = document.getElementsByClassName("deleteIcon");
 let editButtons = document.getElementsByClassName("editIcon");
 let deleteIcon = document.getElementsByClassName("projDeleteIcon");
+let projectsList = document.getElementsByClassName("projectsDisplay");
 function addEventListeners(){
     
 addDeleteIconEvents();
@@ -37,10 +38,14 @@ dom.cancelButton.addEventListener("click", function(){
 //Form Submit
 dom.submitButton.addEventListener("click", function(){
     let values = dom.getFormValues();
+    if(values.taskName === ""){
+        alert("Please Insert a valid name")
+        return;
+    }
     let formatedDate = new Date(values.dueDate);//Formats date returned by the input in order to be able to compare it later
     formatedDate.setHours(0,0,0,0);
     const newTask = createObjectTask(values.taskName, values.taskDescription, 
-          formatedDate, values.priorityLevel, values.done, values.assignProject);
+          formatedDate, values.priorityLevel, values.assignProject);
     pushToArray(newTask, taskArray); 
     render.renderUpdate(activeFilter, arrayToRender, taskArray);
     addEventLis();
@@ -75,10 +80,24 @@ function addEditButtonsEvents(){
     }
 }
 
+function addProjectFilters(){
+    projectsList = document.getElementsByClassName("projectsDisplay");
+    for(let i = 0; i < projectsList.length; i++){
+        projectsList[i].addEventListener("click", function(e){
+            console.log(e.currentTarget);
+            let activeFilter = e.currentTarget.textContent;
+            console.log(activeFilter);
+            arrayToRender = filterEl.projectFilter(taskArray, activeFilter);
+            console.log(arrayToRender);
+            render.renderMainDisplay(arrayToRender);
+            addEventLis();
+        })
+    }
+}
+
 //Edit Submit
 dom.editButtonForm.addEventListener("click", function(){
     let values = dom.getFormValues();
-    console.log(values)
     let idToEdit = taskToEdit.id;
     taskArray = editArrayElement(idToEdit, values, taskArray);
     render.renderUpdate(activeFilter, arrayToRender, taskArray);
@@ -88,16 +107,30 @@ dom.editButtonForm.addEventListener("click", function(){
 //Projects
 dom.check.addEventListener("click", function(){
     let projName = dom.getProjectName();
+    //checks empty project name
+    if(projName === ""){
+        alert("Please insert a valid project name")
+        return
+    }
+
+    //checks duplicate name
+    for(let i = 0; i < projectArray.length; i++){
+        console.log(projectArray[i].projName);
+        if(projName === projectArray[i].projName){
+            return;
+        }
+    }
     const newProj = newProject(projName);
     pushToArray(newProj, projectArray);
     render.projArray(projectArray);
     render.projDropBox(projectArray);
     addDeleteIconEvents();
+    addProjectFilters()
 });
 
 function addDeleteIconEvents(){
     deleteIcon = document.getElementsByClassName("projDeleteIcon");
-    for(let i=1; i < deleteIcon.length; i++){
+    for(let i=0; i < deleteIcon.length; i++){
         deleteIcon[i].addEventListener("click", function(e){
             let value = e.currentTarget;
             projectArray = deleteTask(value.id, projectArray);
