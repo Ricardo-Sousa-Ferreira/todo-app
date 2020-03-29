@@ -13,11 +13,12 @@ let projectArray = [{
 let arrayToRender=[]
 
 let activeFilter = "showAll";
-
+let activeFilterAux;
 let deleteButtons = document.getElementsByClassName("deleteIcon");
 let editButtons = document.getElementsByClassName("editIcon");
 let deleteIcon = document.getElementsByClassName("projDeleteIcon");
 let projectsList = document.getElementsByClassName("projectsDisplay");
+let taskDisplay = document.getElementsByClassName("displayMainTask");
 function addEventListeners(){
     
 addDeleteIconEvents();
@@ -47,13 +48,15 @@ dom.submitButton.addEventListener("click", function(){
     const newTask = createObjectTask(values.taskName, values.taskDescription, 
           formatedDate, values.priorityLevel, values.assignProject);
     pushToArray(newTask, taskArray); 
-    render.renderUpdate(activeFilter, arrayToRender, taskArray);
+    render.renderUpdate(activeFilter, arrayToRender, taskArray, activeFilterAux);
     addEventLis();
 });
 
 function addEventLis(){
     addDeleteButtonsEvents();
     addEditButtonsEvents();
+    addDoneTaskEvent();
+    addProjectFilters();
 }
 //Delete Buttons
 function addDeleteButtonsEvents(){
@@ -67,6 +70,16 @@ function addDeleteButtonsEvents(){
             addEventLis();
         });
     }
+}
+
+function addDoneTaskEvent(){
+    let taskDisplay = document.getElementsByClassName("displayMain");
+    for(let i=0; i<taskDisplay.length; i++){
+        taskDisplay[i].addEventListener("click", function (e){
+            e.currentTarget.classList.toggle("lineThrough");
+        })
+    }
+
 }
 
 function addEditButtonsEvents(){
@@ -84,11 +97,9 @@ function addProjectFilters(){
     projectsList = document.getElementsByClassName("projectsDisplay");
     for(let i = 0; i < projectsList.length; i++){
         projectsList[i].addEventListener("click", function(e){
-            console.log(e.currentTarget);
-            let activeFilter = e.currentTarget.textContent;
-            console.log(activeFilter);
+            activeFilterAux = e.currentTarget.textContent;
+            activeFilter = e.currentTarget.textContent;
             arrayToRender = filterEl.projectFilter(taskArray, activeFilter);
-            console.log(arrayToRender);
             render.renderMainDisplay(arrayToRender);
             addEventLis();
         })

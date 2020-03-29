@@ -7,8 +7,6 @@ const createObjectTask = (title, description, dueDate, priority, project) => {
 
 const pushToArray = (newTask, taskArray) => {
     taskArray.push(newTask);
-    console.log(newTask);
-    window.localStorage.setItem(id, JSON.stringify(taskArray));
 }
 
 const newProject = (projName) => {

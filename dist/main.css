@@ -5,6 +5,10 @@ body{
     height: 100vh;
 }
 
+.lineThrough{
+    text-decoration: line-through;
+    opacity: 0.6;
+}
 /*Navbar*/
 #topNavBar{
     display: flex;
@@ -33,6 +37,7 @@ body{
 
 #quickSearch:focus{
     outline:none;
+    
 }
 
 .fa-search{

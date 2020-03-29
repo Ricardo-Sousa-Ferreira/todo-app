@@ -19,7 +19,12 @@ function renderElements(){
             const editDiv = dom.createDiv();
 
             titleDiv.innerHTML = element.title;
-            dueDateDiv.innerHTML = element.dueDate;
+            if(element.dueDate != "Invalid Date"){
+                let date = new Date(element.dueDate);
+                dueDateDiv.innerHTML =  ('0' + date.getDate()).slice(-2)+ '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-'
+                + date.getFullYear();
+            }
+           
             deleteDiv.innerHTML = '<i class="fas fa-trash-alt"></i>';
             editDiv.innerHTML = '<i class="fas fa-edit"></i>'
 
@@ -80,7 +85,7 @@ function renderElements(){
         })
     }
 
-    function renderUpdate(activeFilter, arrayToRender, taskArray){
+    function renderUpdate(activeFilter, arrayToRender, taskArray, activeFilterAux){
         switch(activeFilter){
             case "showAll":
                 arrayToRender = taskArray;
@@ -103,6 +108,10 @@ function renderElements(){
             case "low":
                 arrayToRender = filterEl.lowFilter(taskArray);
                 break;
+            case activeFilterAux:
+                arrayToRender = filterEl.projectFilter(taskArray, activeFilter);
+                break;
+
         }
     
         renderMainDisplay(arrayToRender);
