@@ -8,6 +8,7 @@ body{
 /*Navbar*/
 #topNavBar{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     background: #3498eb;
     height: 60px;
@@ -15,7 +16,8 @@ body{
     color: white;
     font-family: 'Baloo 2', cursive;
     font-size: 30px;
-    min-width: 630px;
+    width: 1080px;
+    margin: 30px auto 0 auto;
 }
 
 #quickFind{
@@ -50,43 +52,217 @@ body{
     margin: 20px 20px;
 }
 
+#addNewTask{
+    cursor: pointer;
+    height: 30px ;
+    display: flex;
+    align-items: center;
+}
+
+.shake:hover{
+    animation: shake 0.6s infinite;
+}
+
+@keyframes shake{
+    0%{
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+    25%{
+        transform: translate(1px,1px) rotate(deg);
+    }
+    50%{
+        transform: translate(-1px,-1px) rotate(-1deg);
+    }
+    75%{
+        transform: translate(-2px, -1px) rotate(2deg);
+    }
+    100%{
+        transform: translate(-1px, 1px) rotate(-1deg);
+    }    
+}
+
 /*Main Container*/
 #container{
     display: flex;
-    justify-content: space-between;
     height: 100%;
+    width: 1080px;
+    margin:0 auto;
 }
 /*Left Collumn*/
 #leftCol{
     background: #e2f1fd;
-    width: 30%;
     display: flex;
     flex-direction: column;
     border-right: 1px solid rgb(221, 221, 221);  
-    height: 100%;
+    width: 230px;
+    
 }
 
 #filters{
     border-bottom: 1px solid rgb(221, 221, 221);
-    height: 50%;
+    height: 40%;
+    width: 230px;
 }
 
+#filters div{
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 10px;
+    font-family: 'Comfortaa', cursive;
+    cursor: pointer;
+    padding: 4px 4px;
+    border-radius: 3px;
+}
+
+
+#filters div i{
+    margin-right: 7px;
+    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+.hover:hover{
+    background: #b4bfc9;
+    transition: background 1s;
+}
+
+/*Icons*/
+
+.fa-tasks{
+    color: #11cdc6;
+}
+
+.fa-calendar-day{
+    color: #accd73;
+}
+
+.fa-calendar-alt{
+    color: #ba55d3;
+}
+
+.fa-backward{
+    color: #CC943B;
+}
+
+.fa-exclamation{
+    color: #91332c;
+}
+
+#highIcon{
+    color: #ef3038;
+}
+
+#mediumIcon{
+    color: #fff600;
+}
+
+#lowIcon{
+    color: #32cd32;
+}
+
+
+/*Projects Collumn*/
+
+    /*input*/
+
+#newProjContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 4px;
+    margin: 10px 10px;
+    background: rgb(255, 255, 255);
+}
+
+#newProject{
+    border: none;
+    background: transparent;
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#newProject:focus{
+    outline: none;
+}
+
+#check{
+    color:#3498eb;
+    cursor: pointer;
+    margin-right: 10px;
+}
+    /*Projects List*/
 #projects{
-    height: 50%;
+    width: 230px;
+}
+
+#projectList{
+    display: flex;
+    flex-direction: column;
+}
+
+.projContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px
 }
 
 .projectsDisplay{
-    background: blue;
+    font-family: 'Comfortaa', cursive;
+    margin-left: 15px;
 }
+
+
 
 /*Right Collumn*/
 #rightCol{
-    width: 70%;
+    width: 850px;
 }
+
+.displayMain{
+    margin:2px 15px;
+    padding:10px 10px;
+    border-radius: 5px;
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Baloo 2', cursive;
+}
+
+.padron {
+    background: #e2f1fd;
+}
+
+.taskButtons{
+    display: flex;
+    width: 60px;
+    justify-content: space-between;
+}
+.roundIcon{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    text-align: center;
+}
+
+.roundIcon i{
+    color:white;
+    margin: auto;
+    cursor: pointer;
+}
+
 
 /*Pop-Up Form*/
 #projectForm{
-    border: 2px solid black;
+    border: 2px solid  #e2f1fd;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -98,8 +274,42 @@ body{
     margin-top: -200px;
     justify-content: space-between;
     padding: 10px;
+    font-family: 'Baloo 2', cursive;
+    z-index: 1;
+    background: white;
 }
 
 .invisible{
     display: none;
 }
+
+.formInput{
+    border-radius: 5px;
+    border:1px solid rgb(221, 221, 221);
+    background: white;
+    font-family: 'Baloo 2', cursive;
+}
+
+.button{
+    border:1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 15px;
+}
+.green{
+    background: #32cd32;
+}
+
+.yellow{
+    background: #fff600;
+}
+
+.red{
+    background: #ef3038;
+}
+
+
+textarea {
+    resize: none;
+}
+

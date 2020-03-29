@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/8a2f7b5f47.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <title>todo app</title>
 </head>
@@ -15,24 +16,27 @@
             <i class="fas fa-search"></i>
             <input type="text" id="quickSearch" maxlength="45">
         </div>
-        <div id="addNewTask"><i class="far fa-plus-square"></i></div>
+        <div id="addNewTask" class="shake"><i class="far fa-plus-square"></i></div>
     </div>
     <div id="container">
         <div id="leftCol">
             <div id="filters">
-                <div id="allTasks">All Tasks</div>
-                <div id="todayFilter">Today</div>
-                <div id="thisWeekFilter">This Week</div>
-                <div id="behindSchedule">Behind Schedule</div>
-                <div id="lowFilter">Low Priority</div>
-                <div id="mediumFilter">Medium Priority</div>
-                <div id="highFilter">High Priority</div>
+                <div id="allTasks" class="hover"><i class="fas fa-tasks"></i>All Tasks</div>
+                <div id="todayFilter" class="hover"><i class="fas fa-calendar-day"></i>Today</div>
+                <div id="thisWeekFilter" class="hover"><i class="fas fa-calendar-alt"></i>This Week</div>
+                <div id="behindSchedule" class="hover"><i class="fas fa-backward"></i>Behind Schedule</div>
+                <div id="priorityList"><i class="fas fa-exclamation"></i>Priority:
+                    <div id="lowFilter" class="hover"><i class="fas fa-circle" id="lowIcon"></i>Low</div>
+                    <div id="mediumFilter" class="hover"><i class="fas fa-circle" id="mediumIcon"></i>Medium</div>
+                    <div id="highFilter" class="hover"><i class="fas fa-circle" id="highIcon"></i>High</div>
+                </div>
             </div>
             <div id="projects">
                 <div id="projectList"></div>
-                <label for ="newProject"><i class="fas fa-plus-circle"></i></label>
+                <div id="newProjContainer">
                     <input type="text" id="newProject">
-                    <i id="check" class="fas fa-check"></i>
+                    <i id="check" class="fas fa-plus-circle"></i>
+                </div>
             </div>
         </div>
         <div id="rightCol"></div>
@@ -42,32 +46,28 @@
     <div id="toggleInvisibility" class="invisible">
         <div id="projectForm">
             <label>Task Name</label>
-                <input type="text" id="taskName" maxlength="25">
+                <input class="formInput" type="text" id="taskName" maxlength="25">
             <label>Description</label>
-                <textarea name="Description" rows="3" cols="40" id="taskDescription"></textarea>
+                <textarea class="formInput" name="Description" rows="3" cols="40" id="taskDescription"></textarea>
             <label>Due Date</label>
-                <input type="date" id="dueDate">
+                <input class="formInput" type="date" id="dueDate">
             <label>Priority</label>
-            <select class="piorityLevel" name="piorityLevel" id="priorityLevel">
+            <select class="piorityLevel formInput" name="piorityLevel" id="priorityLevel">
                 <option value = "low">Low</option>
                 <option value = "medium">Medium</option>
                 <option value = "high">High</option>
             </select>
-            <div id="statusContainer">
-                <label>Done</label>
-                <input type="checkbox" id="done" name="done" value="true">
-            </div>
             <label>Assing to Project:</label>
-            <select class="assign-project" name="assignProject" id="assignProject">
+            <select class="assign-project formInput" name="assignProject" id="assignProject">
             </select>
             <div id="buttonsContainer">
-                <button id="editButtonForm" class="invisible">
+                <button id="editButtonForm" class="invisible button yellow">
                     Edit Task
                 </button>
-                <button id="submitButton">
+                <button id="submitButton" class="button green">
                     Add new task
                 </button>
-                <button id="cancelButton">
+                <button id="cancelButton" class="button red">
                     Cancel
                 </button>
             </div>
