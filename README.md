@@ -1,6 +1,9 @@
 # todo-app
 Simple to-do app created as part of [The Odin Project Curriculum](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 
+## Live Demo
+To see the app in action, go to [To-Do App](https://ricardo-sousa-ferreira.github.io/todo-app/)
+
 ## Features
 - Create, edit and delete tasks
 - Create and delete projects/topics
